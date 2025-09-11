@@ -1,20 +1,23 @@
 const mongoose = require("mongoose");
 
 
+
+
 const ownerSchema = mongoose.Schema({
-    fullname: {
+    name: {
         type: String,
-        trim: true,
-        minlength: 3
+        minlength: 3,
+        trim: true
     },
-    email: String,
+    email: String, 
     password: String,
-    products: {
+    product: {
         type: Array,
         default: []
-    },
-    picture: String,
-    phone: Number
+    }, 
+    gstin: String,
+    Picture: Buffer
+
 })
 
 

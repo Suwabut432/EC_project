@@ -1,21 +1,19 @@
-const { name } = require("ejs");
-const { text } = require("express");
-
 const mongoose = require("mongoose");
 
 
 
+
 const productSchema = mongoose.Schema({
-    image: String,
     name: String,
+    image: Buffer, 
     price: Number,
     discount: {
         type: Number,
-        default: 0
+        default: 0,
     },
-    bgcolor: String,
     textcolor: String,
-    panelcolo: String
+    bgcolor: String,
+    panelcolor: String
 })
 
 
