@@ -14,6 +14,13 @@ const IsLoggedIn = require("../middlewares/IsLoggedIn");
 
 router.get("/", function (req, res) {
     res.send("hey it's working");
+
+    if (process.env.NODE_ENV === "production") {
+        console.log("Production mode");
+    } else {
+        console.log("Development mode");
+    }
+
 })
 
 router.get("/cart/:id", IsLoggedIn, async function (req, res) {
@@ -47,6 +54,7 @@ router.post("/register", outhorized)
 router.post("/login", logincontrollers)
 
 router.get("/logout", logout);
+
 
 
 module.exports = router;
