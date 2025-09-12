@@ -6,8 +6,11 @@ const dbgr = require("debug")("development:mongoose");
 
 mongoose.connect(process.env.MONGO_URL)
     .then(function () {
-        dbgr("✅ MongoDB Connected");
+        console.log("✅ MongoDB Connected");
     }).catch(err => console.error("❌ MongoDB connection error:", err))
+
+mongoose.connection.on("connected", () => console.log("Mongoose connected to DB"));
+mongoose.connection.on("error", err => console.error("Mongoose connection error:", err));
 
 
 
