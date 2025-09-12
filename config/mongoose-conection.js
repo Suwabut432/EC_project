@@ -7,3 +7,6 @@ mongoose.connect(process.env.MONGO_URL)
     .then(function () {
         dbgr("✅ MongoDB Connected");
     }).catch(err => console.error("❌ MongoDB connection error:", err))
+
+
+
