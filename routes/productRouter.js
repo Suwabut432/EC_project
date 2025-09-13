@@ -4,7 +4,7 @@ const router = express.Router();
 const upload = require("../config/multer-config");
 const productModel = require("../models/product-model");
 
-router.get("/", function (req, res) {
+router.get("/", IsLoggedIn, function (req, res) {
     res.render("admin");
 })
 
