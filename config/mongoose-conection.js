@@ -9,8 +9,5 @@ mongoose.connect(process.env.MONGO_URL)
         console.log("✅ MongoDB Connected");
     }).catch(err => console.error("❌ MongoDB connection error:", err))
 
-mongoose.connection.on("connected", () => console.log("Mongoose connected to DB"));
-mongoose.connection.on("error", err => console.error("Mongoose connection error:", err));
-
 
 
