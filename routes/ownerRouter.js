@@ -36,7 +36,7 @@ if (process.env.NODE_ENV === "development") {
     }
 }
 
-router.get("/admin", IsLoggedIn, function(req, res) {
+router.get("/admin", function(req, res) {
     const success = req.flash("success");
     res.render("createproducts", {success})
 })
