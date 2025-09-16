@@ -2,28 +2,107 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-nG8hLx7BqGhT8zQJw6lN4SGIdQ+eQtiVbwTLUstn5sH2H3N9uVzt3dF9Z/soY9VZ8VhKM03CNehkXw2zRY6zKg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* hamburger animation */
+    .hamburger {
+      width: 30px;
+      height: 22px;
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      position: absolute;
+      height: 3px;
+      width: 100%;
+      background: #1f2937;
+      left: 0;
+      transition: all 0.3s ease-in-out;
+      border-radius: 2px;
+    }
+
+    .hamburger span:nth-child(1) {
+      top: 0;
+    }
+
+    .hamburger span:nth-child(2) {
+      top: 9px;
+    }
+
+    .hamburger span:nth-child(3) {
+      bottom: 0;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg);
+      top: 9px;
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg);
+      bottom: 9px;
+    }
+  </style>
 </head>
 
-<body class="font-['helvetica_now_display']">
-    <nav class="w-full fixed top-0 left-0 px-5 py-3 flex gap-5 justify-between">
-        <h3 class="text-2xl inline-block font-bold">Scatch</h3>
-        <div class="flex gap-5  text-lg justify-end items-center ">
-            <a class="hover:underline" href="/">Home</a>
-            <a class="hover:underline" href="/shop">Shop</a>
-            <a class="hover:underline" href="/owner/admin">Admin Panel</a>
-            <% var isLoggedIn=typeof isLoggedIn !=="undefined" ? isLoggedIn : true %>
-                <% if(isLoggedIn) { %>
+<body class="font-sans bg-gray-50">
+  <!-- Navigation -->
+  <nav class="w-full fixed top-0 left-0 px-6 py-4 bg-white shadow-md flex items-center justify-between z-50">
+    <!-- Logo -->
+    <h3 class="text-2xl font-bold text-gray-800 hover:text-indigo-600 transition-colors duration-300">
+      Scatch
+    </h3>
 
-                    <a class="hover:underline text-red-700" href="/user/logout">Logout</a>
-                    <% } %>
+    <!-- Toggle Button -->
+    <div class="sm:hidden">
+      <div id="menu-btn" class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
 
-        </div>
-    </nav>
+    <!-- Links -->
+    <div id="menu"
+      class="hidden sm:flex flex-col sm:flex-row sm:gap-8 text-base font-medium text-gray-700 items-start sm:items-center absolute sm:static top-16 left-0 w-full sm:w-auto bg-white sm:bg-transparent shadow-md sm:shadow-none sm:p-0 rounded-xl sm:rounded-none overflow-hidden">
+      
+      <a class="block w-full sm:w-auto px-6 py-3 sm:px-0 sm:py-0 hover:bg-indigo-50 sm:hover:bg-transparent hover:text-indigo-600 transition-colors duration-300"
+        href="/">Home</a>
+      <a class="block w-full sm:w-auto px-6 py-3 sm:px-0 sm:py-0 hover:bg-indigo-50 sm:hover:bg-transparent hover:text-indigo-600 transition-colors duration-300"
+        href="/shop">Shop</a>
+      <a class="block w-full sm:w-auto px-6 py-3 sm:px-0 sm:py-0 hover:bg-indigo-50 sm:hover:bg-transparent hover:text-indigo-600 transition-colors duration-300"
+        href="/owner/admin">Admin Panel</a>
+
+      <% var isLoggedIn = typeof isLoggedIn !== "undefined" ? isLoggedIn : true %>
+      <% if (isLoggedIn) { %>
+      <a class="block w-full sm:w-auto px-6 py-3 sm:px-4 sm:py-2 bg-red-100 text-red-700 rounded-md hover:bg-red-600 hover:text-white transition-all duration-300"
+        href="/user/logout">
+        Logout
+      </a>
+      <% } %>
+    </div>
+  </nav>
+
+  <!-- Script for Toggle -->
+  <script>
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('menu');
+
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('active'); // hamburger animation
+      menu.classList.toggle('hidden');
+    });
+  </script>
+</body>
+
+</html>

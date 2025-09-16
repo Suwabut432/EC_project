@@ -1,61 +1,62 @@
 <%- include('./partials/header') %>
 
 <% if(message.length > 0){ %>
-  <div id="flash-msg" class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-red-500">
-    <span class="inline-block mt-1 mb-1 text-white">
+  <div id="flash-msg" class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 
+      px-5 py-3 rounded-md bg-red-500 shadow-lg animate-bounce">
+    <span class="inline-block text-white font-medium">
       <%= message %>
     </span>
   </div>
 <% } %>
 
-<div class="w-full h-screen flex items-start px-20 py-20">
+<div class="w-full min-h-screen flex flex-col md:flex-row items-start px-4 md:px-20 py-24 bg-gray-50 gap-10">
   <!-- Sidebar -->
-  <div class="w-[25%] flex h-screen flex-col items-start">
-    <div class="flex items-center gap-2">
-      <h3>Sort by</h3>
+  <div class="w-full md:w-[25%] flex flex-col h-full pr-0 md:pr-6 border-b md:border-b-0 md:border-r border-gray-200 pb-6 md:pb-0">
+    <div class="flex items-center gap-3 mb-6">
+      <h3 class="font-semibold text-gray-800">Sort by</h3>
       <form action="/shop">
-        <select class="border-[1px] px-2 py-1" name="sortby">
+        <select class="border rounded-md px-3 py-1 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500" name="sortby">
           <option value="popular">Popular</option>
           <option value="newest">Newest</option>
         </select>
       </form>
     </div>
 
-    <div class="flex flex-col mt-20">
-      <a class="block w-fit mb-2" href="">New Collection</a>
-      <a class="block w-fit mb-2" href="">All Products</a>
-      <a class="block w-fit mb-2" href="">Discounted Products</a>
+    <div class="flex flex-wrap md:flex-col gap-2">
+      <a class="block w-fit px-3 py-2 rounded-md hover:bg-indigo-100 text-gray-700 hover:text-indigo-600 transition" href="">New Collection</a>
+      <a class="block w-fit px-3 py-2 rounded-md hover:bg-indigo-100 text-gray-700 hover:text-indigo-600 transition" href="">All Products</a>
+      <a class="block w-fit px-3 py-2 rounded-md hover:bg-indigo-100 text-gray-700 hover:text-indigo-600 transition" href="">Discounted Products</a>
     </div>
 
-    <div class="mt-32">
-      <a class="block w-fit mb-2" href="">Filter by :</a>
-      <a class="block w-fit mb-2" href="">Availability</a>
-      <a class="block w-fit mb-2" href="">Discount</a>
+    <div class="mt-6 md:mt-10 flex flex-wrap md:flex-col gap-2">
+      <h4 class="text-sm font-semibold text-gray-600 uppercase w-full">Filter by :</h4>
+      <a class="block w-fit px-3 py-2 rounded-md hover:bg-indigo-100 text-gray-700 hover:text-indigo-600 transition" href="">Availability</a>
+      <a class="block w-fit px-3 py-2 rounded-md hover:bg-indigo-100 text-gray-700 hover:text-indigo-600 transition" href="">Discount</a>
     </div>
   </div>
 
   <!-- Products Section -->
-  <div class="w-[75%] flex flex-col gap-5 h-screen">
-    <div class="flex items-start gap-5">
-
+  <div class="w-full md:w-[75%] flex flex-col gap-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       <% if(products.length > 0) { %>
         <% products.forEach(function(product){ %>
-          <div class="w-60 bg-[#<%= product.bgcolor %>]">
-            <div class="w-full h-52 flex items-center justify-center">
-              <img class="h-[12rem]" 
+          <!-- Product Card -->
+          <div class="rounded-xl shadow-md hover:shadow-xl transition transform hover:-translate-y-1 bg-[#<%= product.bgcolor %>] overflow-hidden">
+            <div class="w-full h-52 flex items-center justify-center bg-white">
+              <img class="h-[12rem] object-contain" 
                    src="data:image/jpeg;base64,<%= product.image.toString('base64') %>" 
                    alt="<%= product.name %>">
             </div>
-            <div class="w-full flex justify-between bg-[#<%= product.panelcolor %>] text-[#<%= product.textcolor %>] items-center px-4 py-4">
-              <div>
-                <h3><%= product.name %></h3>
-                <h4>₨: <%= product.price %></h4>
+            <div class="w-full flex justify-between items-center px-4 py-4 bg-[#<%= product.panelcolor %>] text-[#<%= product.textcolor %>]">
+              <div class="text-sm">
+                <h3 class="font-semibold text-lg"><%= product.name %></h3>
+                <h4 class="text-gray-700">₨ <%= product.price %></h4>
                 <% if(product.discount) { %>
-                  <h4>Discount: ₨ <%= product.discount %></h4>
+                  <h4 class="text-red-500 text-sm">Discount: ₨ <%= product.discount %></h4>
                 <% } %>
               </div>
-              <a class="w-7 h-7 flex items-center justify-center rounded-full bg-white" href="/user/cart/<%= product._id %>">
-                <i class="ri-add-line"></i>
+              <a class="w-8 h-8 flex items-center justify-center rounded-full bg-white shadow hover:bg-indigo-100 transition" href="/user/cart/<%= product._id %>">
+                <i class="ri-add-line text-gray-800"></i>
               </a>
             </div>
           </div>
@@ -63,7 +64,6 @@
       <% } else { %>
         <h1 class="text-2xl font-bold text-gray-600">Products Not Available</h1>
       <% } %>
-
     </div>
   </div>
 </div>
