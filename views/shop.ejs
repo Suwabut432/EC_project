@@ -1,5 +1,13 @@
 <%- include('./partials/header') %>
 
+<% if(message.length > 0){ %>
+  <div id="flash-msg" class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 
+      px-5 py-3 rounded-md bg-red-500 shadow-lg animate-bounce">
+    <span class="inline-block text-white font-medium">
+      <%= message %>
+    </span>
+  </div>
+<% } %>
 
 <div class="w-full min-h-screen flex flex-col md:flex-row items-start px-4 md:px-20 py-24 bg-gray-50 gap-10">
   <!-- Sidebar -->
