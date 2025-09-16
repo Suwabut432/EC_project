@@ -10,9 +10,8 @@ router.get("/", function (req, res) {
 
 
 router.get("/shop",async function(req, res) {
-    const message = req.flash("message");
     const products = await productModel.find();
-    res.render("shop", {message, products})
+    res.render("shop", {products})
 })
 
 module.exports = router;
